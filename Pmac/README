@@ -1,0 +1,5 @@
+Pmac README file
+-----------------
+Pmac is a pseudo-machine (or virtual machine) simulator for a hypothetical stack machine. It is designed primarily as
+a simple target for assemblers and compilers, allowing the client programmers to write their programs with limited
+concern for the details of the target machine. The simulator consists of a single C program file, pmac.c .
