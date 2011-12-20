@@ -1,0 +1,5 @@
+Pmac-Passim
+--------------
+Pmac-Passim is actually two separate programs which go together: a simple virtual machine interpreter 
+for a stack-based processor (Pmac), and an assembler for the Pmac instruction set (Passim). They should be compiled 
+and run separately, with Passim used to assemble sample programs, and Pmac used to interpret them.
