@@ -1,4 +1,4 @@
-/* init.h 
+/* init.h
  * version 00.01.00
  * Copyright (C) 2009  Joseph Osako
  * This file is part of Pmac-Passim.

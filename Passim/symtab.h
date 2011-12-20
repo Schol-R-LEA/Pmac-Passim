@@ -25,7 +25,8 @@
 
 
 
-typedef struct sym {
+typedef struct sym
+{
     char* name;
     WORD value;
     struct sym* next;

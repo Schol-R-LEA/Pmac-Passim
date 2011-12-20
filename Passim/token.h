@@ -23,11 +23,12 @@
 
 #include "name.h"
 
-typedef enum {
-    T_NONE, 
+typedef enum
+{
+    T_NONE,
     T_LABEL, T_NAME, T_NUMBER,
     T_SHARP, T_AT,
-    T_LBRACKET, T_RBRACKET, 
+    T_LBRACKET, T_RBRACKET,
     T_NEWLINE,
     T_END
 } T_TYPE;
