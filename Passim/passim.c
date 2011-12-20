@@ -39,7 +39,7 @@ symtable labels, opcodes, direct_args, address_args, indexed_args;
 /* main() - driver program for the assembler
    - Reads in the shell args, which are passed to init() for parsing.
    - passes the source file to the analyzer, then passes the source
-     file and the symbol table to the assembler proper.   
+     file and the symbol table to the assembler proper.
  */
 
 int main(int argc, char *argv[])
@@ -59,8 +59,10 @@ int main(int argc, char *argv[])
     LIST = false;  // only print source listing in first pass
     printf("\nPass two...\n");
     assemble();    // pass two - turn instructions to opcodes
-    puts("\nfinished.");          
+    puts("\nfinished.");
     finish(NULL, SUCCEED);
+
+    return 0;
 }
 
 

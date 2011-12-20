@@ -30,23 +30,23 @@
 symbol* create_symbol(char* name, WORD value, symbol* next)
 {
     symbol* newsym;
-    
-    
+
+
     newsym = malloc(sizeof(symbol));
-    
+
     newsym ->name = create_name(name);
     newsym ->value = value;
     newsym ->next = next;
-    
+
     return newsym;
-}    
+}
 
 
 void destroy_symbol(symbol* sym)
 {
     free(sym ->name);
     free(sym);
-}    
+}
 
 void print_symbol(symbol* sym)
 {
@@ -68,41 +68,41 @@ void insert(symtable* table, char* name, WORD value)
     if (NULL == *table)
     {
         *table = (symtable) create_symbol(name, value, NULL);
-    }    
+    }
     else
     {
         curr = (symbol *) *table;
         rest = curr ->next;
-     
-       
+
+
         /* seek until you find a symbol that is equal or greater than head */
         while (NULL != rest && (0 < strncmp(name, curr ->name, (strlen(name) + 1))))
         {
             curr = rest;
             rest = rest ->next;
         }
-    
+
         if (0 == strncmp(name, curr ->name, (strlen(name) + 1)))
         {
             report_err("Duplicate symbol");
-        }    
+        }
         else
-        { 
+        {
             curr ->next = create_symbol(name, value, rest);
-        }    
-    }   
+        }
+    }
 }
 
 
 symbol* match(symtable table, char* name)
 {
     symbol *curr;
-    
+
     curr = (symbol *) table;
-    
+
     while (NULL != curr && 0 != strcmp(curr ->name, name))
         curr = curr ->next;
-    
+
     return curr;
 }
 
@@ -128,15 +128,15 @@ void print_table(symtable table)
 void empty_table(symtable table)
 {
     symbol *curr, *next;
-    
+
     curr = (symbol *) table;
-    
+
     while (NULL != curr)
     {
         next = curr ->next;
         destroy_symbol(curr);
         curr = next;
-    }    
+    }
 }
 
 

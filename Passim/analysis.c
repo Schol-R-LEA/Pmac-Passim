@@ -30,11 +30,11 @@
 WORD count_text();
 
 void analyze()
-{    
+{
     WORD word_count = 0;
 
     printf("   0: ");
-    
+
     while(!(feof(source) || ferror(source)))
     {
         get_token();
@@ -45,50 +45,50 @@ void analyze()
             insert(&labels, token_buffer, word_count);
             get_token();    // get the next token for processing
         }
-        
+
         // after any possible labels, get either an opcode or a directive
         switch(token_type)
         {
-            case T_NAME:
-                if (match(opcodes, token_buffer))
-                {
-                    word_count++;
-                }
-                else if (NULL != match(address_args, token_buffer) 
-                         || NULL != match(direct_args, token_buffer))
-                {
-                    word_count += 2;
-                }
-                else if (NULL !=   match(indexed_args, token_buffer))
-                {
-                    word_count += 3;
-                }      
-                else 
-                {
-                  // printf("current token : %s", token_buffer);
-                    report_err("Instruction expected.");
-                }
-                
-                eat_line();
-                break;    
-                
-            case T_AT:
-                word_count += count_text();
-                break;
-            case T_SHARP:
+        case T_NAME:
+            if (match(opcodes, token_buffer))
+            {
                 word_count++;
-                eat_line();
-                break;
-            case T_NEWLINE:
-            case T_END:
-                break;    // do nothing
-            default:
-                // anything else is an error
-                report_err("Opcode or directive expected.");
-                eat_line();
-                break;
+            }
+            else if (NULL != match(address_args, token_buffer)
+                     || NULL != match(direct_args, token_buffer))
+            {
+                word_count += 2;
+            }
+            else if (NULL !=   match(indexed_args, token_buffer))
+            {
+                word_count += 3;
+            }
+            else
+            {
+                // printf("current token : %s", token_buffer);
+                report_err("Instruction expected.");
+            }
+
+            eat_line();
+            break;
+
+        case T_AT:
+            word_count += count_text();
+            break;
+        case T_SHARP:
+            word_count++;
+            eat_line();
+            break;
+        case T_NEWLINE:
+        case T_END:
+            break;    // do nothing
+        default:
+            // anything else is an error
+            report_err("Opcode or directive expected.");
+            eat_line();
+            break;
         }
-    }          
+    }
 }
 
 
@@ -98,14 +98,14 @@ WORD count_text()
 {
     char ch;
     int char_count;
-    
+
     ch = fgetc(source);
-    
+
     for (char_count = 0; ('\n' != ch); char_count++)
     {
         ch = fgetc(source);
     }
-    
-    return char_count;   
+
+    return char_count;
 }
 

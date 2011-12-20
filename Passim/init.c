@@ -51,7 +51,7 @@ void init_tables()
     insert(&opcodes, "PUSHP", 0x0008);
     insert(&opcodes, "PUSHZ", 0x0009);
     insert(&opcodes, "DUP",   0x000A);
-    insert(&address_args, "POP", 0x0100);
+    insert(&address_args, "POPA", 0x0100);
     insert(&indexed_args, "POPI", 0x0101);
     insert(&opcodes, "POPR",  0x0102);
     insert(&opcodes, "POPO",  0x0103);
@@ -92,9 +92,9 @@ void parse_args(int count, char *list[])
 {
     if (3 > count)
     {
-        if (1 == count && (0 == strcmp("--symbols", list[1])))
-	{
-	    init_tables();
+        if (2 == count && (0 == strcmp("--symbols", list[1])))
+        {
+            init_tables();
             printf("%10s %16s\n", "Mnemonic", "Opcode");
             puts("----------------------------");
             printf("Unary ops:\n");

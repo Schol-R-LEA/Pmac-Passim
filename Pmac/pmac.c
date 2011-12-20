@@ -51,7 +51,7 @@ WORD fp = MAXMEM - 1;  // frame pointer, initially matches the stack pointer
 enum {
     HALT = 0,
     PUSH, PUSHI, PUSHR, PUSHA, PUSHO, PUSHF, PUSHS, PUSHP, PUSHZ, DUP,
-    POP = 0x0100, POPI, POPR, POPO, POPF,  POPS, DROP, SWAP,
+    POPA = 0x0100, POPI, POPR, POPO, POPF,  POPS, DROP, SWAP,
     BRA = 0x0200, BRI,
     BRZ = 0x0300, BNZ,
     BSR = 0x0400, RTS,
@@ -236,7 +236,7 @@ void interp()
                 push(memory[sp]);
                 trace("DUP", op);
                 break;
-            case POP:
+            case POPA:
                 memory[argument()] = pop();
                 if(TRACE)
                 {   temp = memory[ip];
@@ -605,7 +605,7 @@ void display_program()
             case DUP:     /* push zero */
                 puts("DUP");
                 break;
-            case POP:
+            case POPA:
                 ip++;
                 printf("POP %4x\n", memory[ip]);
                 break;

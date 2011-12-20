@@ -56,9 +56,10 @@ void get_token()
     token_type = T_NONE;  /* no current token */
     token_buffer[0] = DELIM;
 
-     /* eat any whitespace except newline */
+    /* eat any whitespace except newline */
 
-    do {
+    do
+    {
         next_char = toupper(fgetc(source));
         if (feof(source) || ferror(source))
         {
@@ -68,9 +69,10 @@ void get_token()
         putchar(next_char);
         if (LIST)
         {
-           fputc(next_char, listing);
+            fputc(next_char, listing);
         }
-    } while ('\n' != next_char && isspace(next_char));
+    }
+    while ('\n' != next_char && isspace(next_char));
 
     if (isalpha(next_char))
     {
@@ -84,35 +86,35 @@ void get_token()
     {
         switch(next_char)
         {
-            case ';' :
-                skip_comment();
-                break;
-            case '#' :
-                get_sharp();
-                break;
-             case '@' :
-                get_at();
-                break;
-            case '[' :
-                get_rbracket();
-                break;
-            case ']' :
-                get_lbracket();
-                break;
-            case '\n':
-                get_newline();
-                break;
-            default:
-                if (feof(source) || ferror(source))
-                {
-                    token_type = T_END;
-                }
-                else
-                {
-                    report_err("Invalid character");
-                    printf("%x\n", (int) next_char);
-                }
-                break;
+        case ';' :
+            skip_comment();
+            break;
+        case '#' :
+            get_sharp();
+            break;
+        case '@' :
+            get_at();
+            break;
+        case '[' :
+            get_rbracket();
+            break;
+        case ']' :
+            get_lbracket();
+            break;
+        case '\n':
+            get_newline();
+            break;
+        default:
+            if (feof(source) || ferror(source))
+            {
+                token_type = T_END;
+            }
+            else
+            {
+                report_err("Invalid character");
+                printf("%x\n", (int) next_char);
+            }
+            break;
         }
     }
 }
@@ -133,7 +135,7 @@ void get_name()
         putchar(next_char);
         if (LIST)
         {
-           fputc(next_char, listing);
+            fputc(next_char, listing);
         }
     }
 
@@ -145,7 +147,6 @@ void get_name()
     else if (':' == next_char)
     {
         token_type = T_LABEL;
-        next_char = toupper(fgetc(source));
     }
     else
     {
@@ -165,7 +166,7 @@ void get_number()
         putchar(next_char);
         if (LIST)
         {
-           fputc(next_char, listing);
+            fputc(next_char, listing);
         }
         next_char = toupper(fgetc(source));
     }
@@ -225,7 +226,7 @@ void skip_comment()
         putchar(next_char);
         if (LIST)
         {
-           fputc(next_char, listing);
+            fputc(next_char, listing);
         }
     }
     get_newline();
@@ -240,7 +241,7 @@ void eat_line()
         putchar(next_char);
         if (LIST)
         {
-           fputc(next_char, listing);
+            fputc(next_char, listing);
         }
     }
     get_newline();
@@ -256,35 +257,35 @@ void print_toktype()
     printf("\ttoken type: ");
     switch (token_type)
     {
-        case T_NONE:
-            printf("T_NONE");
-            break;
-        case T_LABEL:
-            puts("T_LABEL");
-            break;
-        case T_NAME:
-            puts("T_NAME");
-            break;
-        case T_NUMBER:
-            puts("T_NUMBER");
-            break;
-        case T_SHARP:
-            puts("T_SHARP");
-            break;
-        case T_AT:
-            puts("T_AT");
-            break;
-        case T_LBRACKET:
-            puts("T_LBRACKET");
-            break;
-        case T_RBRACKET:
-            puts("T_RBRACKET");
-            break;
-        case T_NEWLINE:
-            puts("T_NEWLINE");
-            break;
-        default:
-             puts("invalid token type");
+    case T_NONE:
+        printf("T_NONE");
+        break;
+    case T_LABEL:
+        puts("T_LABEL");
+        break;
+    case T_NAME:
+        puts("T_NAME");
+        break;
+    case T_NUMBER:
+        puts("T_NUMBER");
+        break;
+    case T_SHARP:
+        puts("T_SHARP");
+        break;
+    case T_AT:
+        puts("T_AT");
+        break;
+    case T_LBRACKET:
+        puts("T_LBRACKET");
+        break;
+    case T_RBRACKET:
+        puts("T_RBRACKET");
+        break;
+    case T_NEWLINE:
+        puts("T_NEWLINE");
+        break;
+    default:
+        puts("invalid token type");
     }
 }
 
